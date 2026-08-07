@@ -1,0 +1,33 @@
+[
+  {
+    "nombre": "FarmaPlus",
+    "tipo": "vtex",
+    "base_url": "https://www.farmaplus.com.ar",
+    "activa": true
+  },
+  {
+    "nombre": "Farmacity",
+    "tipo": "vtex",
+    "base_url": "https://www.farmacity.com.ar",
+    "activa": true
+  },
+  {
+    "nombre": "FarmaLife",
+    "tipo": "vtex",
+    "base_url": "https://www.farmalife.com.ar",
+    "activa": true
+  },
+  {
+    "nombre": "Farmacias del Pueblo",
+    "tipo": "vtex",
+    "base_url": "https://www.farmaciasdelpueblo.com.ar",
+    "activa": true
+  },
+  {
+    "nombre": "Simplicity",
+    "tipo": "vtex",
+    "base_url": "https://www.simplicity.com.ar",
+    "activa": false,
+    "nota": "Perfumería/cosmética: no lista medicamentos. Poner en true si vendés cuidado personal."
+  }
+]
