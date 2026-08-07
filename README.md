@@ -10,7 +10,87 @@ Hacerlo a mano son 6 productos × 4 farmacias = 24 búsquedas. Esto tarda menos 
 
 ---
 
-## 1. Usarlo (los 3 pasos de siempre)
+## 1. Antes de empezar (se hace una sola vez)
+
+Esto hay que hacerlo la primera vez nada más. Una vez que funciona, no lo tocás más.
+
+### Qué necesitás
+
+| | |
+|---|---|
+| **Internet** | consulta las webs de las farmacias en vivo |
+| **Python 3.10 o superior** | el programa está escrito en Python |
+| **La librería `requests`** | una pieza extra de Python, se instala en 10 segundos |
+| **La carpeta del proyecto** | con `check_stock.py`, `productos.csv` y `farmacias.json` adentro |
+
+### Paso 1 — ¿Tenés Python?
+
+Abrí la terminal y escribí:
+
+```
+python3 --version
+```
+
+- Si te contesta algo como `Python 3.13.7` (o cualquier número **3.10 o mayor**), listo, pasá al paso 2.
+- Si dice `command not found` o te muestra `Python 3.9` o menor, instalá la última versión
+  desde [python.org/downloads](https://www.python.org/downloads/) y volvé a probar.
+
+> **En Windows** el comando suele ser `python` en vez de `python3` (y `pip` en vez de `pip3`).
+> Si `python3` no anda, probá con `python`. Al instalar desde python.org, tildá la opción
+> **"Add Python to PATH"** en la primera pantalla, si no la terminal no lo va a encontrar.
+
+### Paso 2 — Instalar `requests`
+
+```
+pip3 install requests
+```
+
+Tarda unos segundos. Si te dice `Requirement already satisfied`, ya lo tenías: mejor.
+
+Para confirmar que quedó bien:
+
+```
+python3 -c "import requests; print('ok')"
+```
+
+Tiene que responder `ok`.
+
+### Paso 3 — Pararte en la carpeta del proyecto
+
+Descomprimí la carpeta del proyecto donde te quede cómodo (Escritorio, Documentos, da igual)
+y en la terminal andá hasta ahí con `cd`. Por ejemplo:
+
+```
+cd ~/Escritorio/scraper-pharma
+```
+
+Para verificar que estás en el lugar correcto:
+
+```
+ls
+```
+
+Tenés que ver, entre otros, estos tres archivos: `check_stock.py`, `productos.csv` y `farmacias.json`.
+
+### Paso 4 — Prueba rápida
+
+Antes de correr todo, probá con una sola farmacia para confirmar que la conexión funciona:
+
+```
+python3 check_stock.py --solo FarmaPlus
+```
+
+Si te muestra una tabla con números, ya está todo listo. Si te da errores, mirá el punto 7.
+
+### Y la configuración propiamente dicha
+
+Nada obligatorio: el proyecto viene con 6 productos de ejemplo en `productos.csv` y las
+4 farmacias ya configuradas en `farmacias.json`. Cuando quieras poner **tus** productos,
+seguí el punto 4; para sumar otra farmacia, el punto 8.
+
+---
+
+## 2. Usarlo (los 3 pasos de siempre)
 
 **Paso 1.** Abrí la terminal en la carpeta del proyecto.
 
@@ -40,7 +120,7 @@ Esas dos últimas líneas son los archivos que se generaron. **Abrilos con Excel
 
 ---
 
-## 2. Los dos archivos que genera
+## 3. Los dos archivos que genera
 
 Se guardan en la carpeta `reportes/`. El nombre incluye la fecha y la hora
 (`20260807-2215` = 7 de agosto de 2026, 22:15), así que nunca se pisan entre sí y
@@ -74,11 +154,11 @@ directo al producto** en la web de esa farmacia (columna `url`), por si querés 
 | **(?)** al lado | lo encontró por nombre parecido, no por código de barras | revisá el link y confirmá que sea tu producto |
 
 ⚠️ **Cuidado con `NO_LISTADO`.** Si sabés que esa farmacia sí vende el producto, casi
-siempre es porque lo cargaron con **otro código de barras**. Ver el punto 4.
+siempre es porque lo cargaron con **otro código de barras**. Ver el punto 5.
 
 ---
 
-## 3. Cambiar la lista de productos
+## 4. Cambiar la lista de productos
 
 Abrí el archivo `productos.csv` con Excel. Se ve así:
 
@@ -101,7 +181,7 @@ Agregá las filas que quieras y guardá. La próxima vez que corras el programa,
 
 ---
 
-## 4. El truco importante: un producto, varios códigos de barras
+## 5. El truco importante: un producto, varios códigos de barras
 
 Un mismo producto puede estar cargado con distintos EAN según la cadena. Enterogermina
 Plus figura como `7798389330018` en FarmaPlus, pero como `7795312109017` en Farmacias
@@ -119,7 +199,7 @@ Se prueban todos. Esto resuelve la enorme mayoría de los `NO_LISTADO` falsos.
 
 ---
 
-## 5. Variantes útiles
+## 6. Variantes útiles
 
 Todo esto es opcional; con `python3 check_stock.py` solo ya funciona.
 
@@ -140,15 +220,18 @@ Usar otra lista de productos en vez de `productos.csv`.
 
 ---
 
-## 6. Si algo no anda
+## 7. Si algo no anda
 
-**"command not found: python3"** — no está instalado Python. Instalalo desde
-[python.org](https://www.python.org/downloads/) y volvé a intentar.
+**"command not found: python3"** — no está instalado Python (o en Windows, el comando es
+`python`). Ver el punto 1, paso 1.
 
 **"No module named 'requests'"** — falta una pieza. Corré una sola vez:
 ```
 pip3 install requests
 ```
+
+**"can't open file 'check_stock.py'"** — la terminal no está parada en la carpeta del
+proyecto. Ver el punto 1, paso 3.
 
 **Muchos `ERROR` en el resumen** — la farmacia está bloqueando los pedidos por venir muy
 seguidos. Esperá unos minutos y volvé a correrlo, o hacelo más lento:
@@ -165,7 +248,7 @@ así, en minúscula, en la primera fila.
 
 ---
 
-## 7. Agregar otra farmacia
+## 8. Agregar otra farmacia
 
 Muchas farmacias online argentinas usan la misma plataforma por atrás (VTEX). Si la que
 querés sumar es una de esas, alcanza con agregarla a la lista `farmacias.json`.
